@@ -1,0 +1,19 @@
+{
+    "env": {
+        "node"   : true,
+        "es6"    : true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "extends": "eslint:recommended",
+	"rules": {
+		"comma-dangle": [2,"always"],
+		"indent": [ 2, "tab" ],
+		"quotes": [ 2, "single" ],
+		"linebreak-style": [ 2, "unix" ],
+		"semi": [ 2, "always" ],
+		"require-jsdoc": [1],
+		"valid-jsdoc": [1]
+	}
+}
