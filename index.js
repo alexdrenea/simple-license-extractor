@@ -2,7 +2,7 @@
 var fs = require('fs');
 var supportedFiles = [
     { name: 'Bower Components', file: 'bower.json', exec: bowerAnalyze },
-    { name: 'Node Modules', file: 'package.json', exec: packageAnalyze }
+    { name: 'Node Modules', file: 'package.json', exec: packageAnalyze },
 ];
 function bowerAnalyze(path) {
     return new Promise(function (resolve, reject) {
@@ -21,6 +21,9 @@ function bowerAnalyze(path) {
             var dependencies = [];
             try {
                 file = JSON.parse(file);
+                if (!file.dependencies) {
+                    return resolve([]);
+                }
                 dependencies = dependencies.concat(Object
                     .keys(file.dependencies)
                     .map(function (key) {
@@ -98,21 +101,28 @@ function packageAnalyze(path) {
     });
 }
 function analyze(path) {
-    if (!path || fs.accessSync(path)) {
-        throw new Error('Missing path');
-    }
-    var projectFiles = fs.readdirSync(path);
-    projectFiles.forEach(function (file) {
-        var supportedFile = supportedFiles.find(function (supportedFile) { return supportedFile.file === file; });
-        if (supportedFile) {
-            console.log("Executing " + supportedFile.name + " analysis");
-            supportedFile
-                .exec(path)
-                .then(function (res) {
-                console.log(supportedFile.name + ":");
-                console.log(res);
-            });
+    return new Promise(function (resolve, reject) {
+        if (!path || fs.accessSync(path)) {
+            return reject('Missing path');
         }
+        var projectFiles = fs.readdirSync(path);
+        Promise
+            .all(projectFiles
+            .map(function (file) {
+            var supportedFile = supportedFiles
+                .find(function (supportedFile) { return supportedFile.file === file; });
+            if (supportedFile) {
+                return new Promise(function (resolve, reject) {
+                    supportedFile
+                        .exec(path)
+                        .then(resolve)
+                        .catch(reject);
+                });
+            }
+        })
+            .filter(function (promise) { return promise; }))
+            .then(resolve)
+            .catch(reject);
     });
 }
 module.exports = analyze;
