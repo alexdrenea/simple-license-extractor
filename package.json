@@ -1,7 +1,0 @@
-{
-	"dependencies": {},
-	"devDependencies": {
-		"@types/es6-promise": "^0.0.32",
-		"@types/node": "^7.0.4"
-	}
-}
