@@ -1,0 +1,30 @@
+{
+	"name": "license-extractor",
+	"version": "0.0.1",
+	"description": "Extract licenses from project's external libraries",
+	"main": "index.js",
+	"dependencies": {},
+	"devDependencies": {
+		"@types/es6-promise": "^0.0.32",
+		"@types/node": "^7.0.4"
+	},
+	"scripts": {
+		"test": "node index.spec.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github:Prediti/License-Extractor.git"
+	},
+	"keywords": [
+		"license",
+		"due diligence",
+		"MIT",
+		"GPL",
+		"MPL",
+		"Apache",
+		"Open",
+		"Source"
+	],
+	"author": "Stefanos Chrs <stefanoschrs@hotmail.com>",
+	"license": "MIT"
+}
