@@ -1,7 +1,7 @@
 {
-	"name": "license-extractor",
+	"name": "simple-license-extractor",
 	"version": "0.0.1",
-	"description": "Extract licenses from project's external libraries",
+	"description": "Extract licenses from project's external libraries without any other dependencies",
 	"main": "index.js",
 	"dependencies": {},
 	"devDependencies": {
