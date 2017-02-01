@@ -18,8 +18,15 @@ const supportedFiles: SupportedFile[] = [
 function bowerAnalyze(path: string) {
     return new Promise((resolve, reject) => {
         let searchPath = `${path}/bower_components`;
+
+        /**
+         * Bower allows you to save the components in a
+         * different directory using the 'directory' key
+         * in the project's '.bowerrc'
+         */
         try{
             let bowerrc = JSON.parse(fs.readFileSync(`${path}/.bowerrc`, 'utf8'));
+
             if(bowerrc.directory){
                 searchPath = `${path}/${bowerrc.directory}`;
             }
@@ -68,7 +75,9 @@ function bowerAnalyze(path: string) {
                     });
                 }))
                 .then((res) => {
-                    resolve(res);
+                    resolve({
+                        bower: res
+                    });
                 });
         });
     });
@@ -115,7 +124,9 @@ function packageAnalyze(path: string) {
                     });
                 }))
                 .then((res) => {
-                    resolve(res);
+                    resolve({
+                        npm: res
+                    });
                 });
         });
     });

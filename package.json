@@ -1,15 +1,18 @@
 {
 	"name": "simple-license-extractor",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Extract licenses from project's external libraries without any other dependencies",
-	"main": "index.js",
 	"dependencies": {},
 	"devDependencies": {
 		"@types/es6-promise": "^0.0.32",
 		"@types/node": "^7.0.4"
 	},
+	"main": "./lib/index.js",
+	"bin": {
+		"simple-license-extractor": "bin/simple-license-extractor"
+	},
 	"scripts": {
-		"test": "node index.spec.js"
+		"test": "node lib/index.spec.js"
 	},
 	"repository": {
 		"type": "git",
@@ -22,8 +25,10 @@
 		"GPL",
 		"MPL",
 		"Apache",
-		"Open",
-		"Source"
+		"Open Source",
+		"npm",
+		"bower",
+		"maven"
 	],
 	"author": "Stefanos Chrs <stefanoschrs@hotmail.com>",
 	"license": "MIT"
